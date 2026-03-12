@@ -1,6 +1,24 @@
 # AIF-Movies
 Projet AI Framework : Intégration d'outils IA pour une plateforme de streaming
 
+Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Il comprend plusieurs étapes :
+
+### 1) Développement et entraînement du modèle
+
+Création d’un modèle (MovieNet) qui prend en entrée les affiches de films et prédit parmi 10 genres.
+
+Entraînement du modèle avec PyTorch sur un dataset d’affiches de films.
+
+### 2) Développement d’une API et d’une interface locale
+
+Création d’une API Flask pour faire des prédictions sur une ou plusieurs images.
+
+Développement d’une interface Gradio pour interagir avec le modèle en local.
+
+### 3) Préparation au déploiement
+
+Création d’une image Docker contenant l’API Flask et l’interface Gradio.
+
 ## Scripts Python 
 
 ### `MovieNet.py`
