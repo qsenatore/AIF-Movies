@@ -26,10 +26,5 @@ class MovieNet(nn.Module):
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         return x
-    
-    def get_features(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(-1, 16 * 4 * 4)
-        return x
+
 

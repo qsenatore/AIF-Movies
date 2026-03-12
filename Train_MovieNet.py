@@ -59,7 +59,7 @@ if __name__=='__main__':
     ])
     
     dataset = torchvision.datasets.ImageFolder(
-        '/home/senatorequentin/MovieGenre/content/sorted_movie_posters_paligema',
+        '/home/senatorequentin/MovieGenre/content/sorted_movie_posters_paligema',  # A modifier en fonction de où est situé le dataset !!!
         transform=transform
     )
     
