@@ -72,7 +72,7 @@ if __name__=='__main__':
     testloader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=2)
     
     # Instanciation du modèle
-    net = MovieNet()  # remplacer par MoviePosterNet adapté à 3 canaux et 10 genres
+    net = MovieNet()
     net = net.to(device)
     
     optimizer = optim.Adam(net.parameters(), lr=args.lr)
