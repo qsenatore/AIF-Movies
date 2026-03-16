@@ -26,7 +26,7 @@ Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 ### `Train_MovieNet.py`
 
 - Script d'entraînement du modèle MovieNet
-- Vu que le dataset n'est pas sur le répertoire, il faut modifier l'emplacement du dataset à la ligne 62 pour rediriger vers le chemin du dataset téléchargé en local (lien de téléchargement : https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view)
+- Vu que le dataset n'est pas sur ce répertoire, il faut modifier l'emplacement du dataset à la ligne 62 pour rediriger vers le chemin du dataset téléchargé en local (lien de téléchargement : https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view)
 - À la fin de l’entraînement, les poids sont sauvegardés dans `saved_models/` (ignoré par Git)
 
 Éxécution : `python Train_MovieNet.py --epochs 10 --batch_size 32 --lr 0.001`
