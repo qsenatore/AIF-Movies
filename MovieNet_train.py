@@ -56,14 +56,15 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--batch_size', type=int, default=32)
-    parser.add_argument('--lr', type=float, default=1e-3)
+    parser.add_argument('--lr', type=float, default=1e-4)
     args = parser.parse_args()
 
     # Transforms pour les posters
     transform = transforms.Compose([
-        transforms.Resize((185, 298)),
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.5,0.5,0.5], std=[0.5,0.5,0.5])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                             std=[0.229, 0.224, 0.225])
     ])
 
     dataset = torchvision.datasets.ImageFolder(
@@ -83,7 +84,7 @@ if __name__=='__main__':
     net = MovieNet()
     net = net.to(device)
 
-    optimizer = optim.Adam(net.parameters(), lr=args.lr)
+    optimizer = optim.Adam(filter(lambda p: p.requires_grad, net.parameters()), lr=args.lr)
 
     # Training
     train(net, optimizer, trainloader, testloader, epochs=args.epochs)
