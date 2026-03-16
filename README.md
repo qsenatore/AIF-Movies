@@ -43,4 +43,4 @@ Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 - Fournit un interface web Gradio pour tester le modèle facilement
 - L'interface est accessible sur `http://127.0.0.1:7860`
 
-Éxécution : `python app_gradio.py`
+Éxécution : `python MovieNet_gradio.py`
