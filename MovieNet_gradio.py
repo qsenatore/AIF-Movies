@@ -3,7 +3,7 @@ import requests
 import io
 import matplotlib.pyplot as plt
 
-API_URL = "http://127.0.0.1:5075/predict"
+API_URL = "http://api:5075/predict"
 genres = ["action", "animation", "documentary", "comedy", "drama", 
           "fantasy", "horror", "romance", "science fiction", "thriller"]
 
