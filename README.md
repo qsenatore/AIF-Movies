@@ -4,7 +4,7 @@ Cette partie a pour objectif de développer un modèle capable de prédire le ge
 
 ### 1) Développement et entraînement du modèle
 
-Création d’un modèle de computer vision (MovieNet) qui prend en entrée les affiches de films et prédit parmi 10 genres.
+Création d’un modèle de computer vision (MovieNet) qui prend en entrée des affiches de films et prédit parmi 10 genres.
 
 Entraînement du modèle avec PyTorch sur un dataset d’affiches de films.
 
@@ -18,10 +18,14 @@ Développement d’une interface Gradio pour interagir avec le modèle en local.
 
 Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 
+## Image et container Docker
+
+Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la commande `sudo docker compose up` dans son terminal. Cela construit deux images Docker (une pour l'API, une pour l'interface Gradio), puis instancie deux conteneurs à partir de ces images. L'interface MovieNet est ensuite accessible à l'adresse suivante : `http://localhost:7860`
+
 ## Scripts Python 
 
 ### `MovieNet.py`
-- Contient la définition du modèle de prédiction MovieNet. C'est ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film.
+- Contient la définition du modèle de prédiction MovieNet. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film.
 
 ### `Train_MovieNet.py`
 
@@ -29,18 +33,12 @@ Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 - Vu que le dataset n'est pas sur ce répertoire, il faut modifier l'emplacement du dataset à la ligne 62 pour rediriger vers le chemin du dataset téléchargé en local (lien de téléchargement : https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view)
 - À la fin de l’entraînement, les poids sont sauvegardés dans `saved_models/` (ignoré par Git)
 
-Éxécution : `python Train_MovieNet.py --epochs 10 --batch_size 32 --lr 0.0001`
-
 ### `MovieNet_api.py`
 
 - Fournit une API REST avec Flask pour faire des prédictions
 - L’API est disponible sur `http://127.0.0.1:5075`
 
-Éxecution : `python MovieNet_api.py --model_path saved_models/movie_poster_model.pth`
-
 ### `MovieNet_gradio.py`
 
 - Fournit un interface web Gradio pour tester le modèle facilement
 - L'interface est accessible sur `http://127.0.0.1:7860`
-
-Éxécution : `python MovieNet_gradio.py`
