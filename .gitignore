@@ -3,3 +3,7 @@ saved_models/
 
 # Fichiers temporaires Gradio
 .gradio/
+
+# Dossier pycache
+__pycache__/
+*.pyc
