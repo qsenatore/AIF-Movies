@@ -1,6 +1,6 @@
 # AIF-Movies - Partie 1
 
-Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Il comprend plusieurs étapes :
+Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend plusieurs étapes :
 
 ### 1) Développement et entraînement du modèle
 
