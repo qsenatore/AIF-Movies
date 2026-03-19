@@ -1,9 +1,0 @@
-# Dossier pour les poids des modèles
-saved_models/
-
-# Fichiers temporaires Gradio
-.gradio/
-
-# Dossier pycache
-__pycache__/
-*.pyc
