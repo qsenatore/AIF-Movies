@@ -1,7 +1,7 @@
 # Artificial Intelligence Frameworks - Projet INSA 5ème année
 
 <details>
-<summary><strong>Partie 1</strong></summary>
+<summary><strong>Partie 1</strong><br></summary>
 
 Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend plusieurs étapes :
 
