@@ -38,6 +38,6 @@ Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la comm
 
 ### `Train_MovieNet.py` (Script bonus)
 
-- Script d'entraînement du modèle MovieNet. N'est utilise que si vous voulez réentraîner le modèle vous même.
+- Script d'entraînement du modèle MovieNet. N'est utile que si vous voulez réentraîner le modèle vous même.
 - Si le dataset n'est pas présent en local, il est auotmatiquement téléchargé sur la machine depuis https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view
 - Sauvegarde les poids dans le fichier `movie_poster_model.pth`
