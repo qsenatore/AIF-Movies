@@ -4,7 +4,7 @@
 ### Objectif
 Intégration d’outils d’intelligence artificielle dans une plateforme de streaming de films.
 
-## Partie 1 — Classification de films
+## Partie 1 — Classification de films à partir de leur poster
 
 <details>
 <summary><strong>Voir les détails</strong><br></summary>
@@ -50,5 +50,14 @@ Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la comm
 - Script d'entraînement du modèle MovieNet. N'est utile que si vous voulez réentraîner le modèle vous même.
 - Si le dataset n'est pas présent en local, il est auotmatiquement téléchargé sur la machine depuis https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view
 - Sauvegarde les poids dans le fichier `movie_poster_model.pth`
+
+</details>
+
+## Partie 2 — Recommandation de films à partir de leur poster
+
+<details>
+<summary><strong>Voir les détails</strong><br></summary>
+
+Cette partie a pour objectif de développer un modèle capable de recommander d'autres films à partir de l'affiche d'un film.
 
 </details>
