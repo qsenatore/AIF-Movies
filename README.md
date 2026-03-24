@@ -11,7 +11,7 @@ Pour utiliser les différentes fonctionnalités développées dans ce projet, il
 ## Partie 1 — Classification de films à partir de leur poster
 
 <details>
-<summary><strong>Voir les détails</strong><br></summary>
+<summary><strong>Voir les détails</strong></summary>
 
 Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend plusieurs étapes :
 
@@ -36,15 +36,6 @@ Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 ### `MovieNet.py`
 - Contient la définition du modèle de prédiction MovieNet. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film
 
-### `MovieNet_api.py`
-
-- Fournit une API REST avec Flask pour faire des prédictions
-- Si le fichier avec les poids du modèle ne sont pas présents en local, il est automatiquement téléchargé sur la machine depuis https://huggingface.co/qsenatore/MovieNet
-
-### `MovieNet_gradio.py`
-
-- Fournit un interface web Gradio pour utiliser le modèle facilement
-
 ### `Train_MovieNet.py` (Script bonus)
 
 - Script d'entraînement du modèle MovieNet. N'est utile que si vous voulez réentraîner le modèle vous même.
@@ -56,8 +47,46 @@ Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 ## Partie 2 — Recommandation de films à partir de leur poster
 
 <details>
-<summary><strong>Voir les détails</strong><br></summary>
+<summary><strong>Voir les détails</strong><</summary>
 
 Cette partie a pour objectif de développer un modèle capable de recommander d'autres films à partir de l'affiche d'un film.
 
 </details>
+
+## Partie 3 —
+
+<details>
+<summary><strong>Voir les détails</strong><</summary>
+
+
+
+</details>
+
+## Partie 4 — 
+
+<details>
+<summary><strong>Voir les détails</strong><</summary>
+
+
+
+</details>
+
+## Partie 5 — 
+
+<details>
+<summary><strong>Voir les détails</strong><</summary>
+
+
+
+</details>
+
+### Scripts Python utilisés dans les 5 parties
+
+### `Movie_api.py`
+
+- Fournit une API REST avec Flask
+- Pour la prédiction de genre de films, si le fichier avec les poids du modèle n'est pas présent en local, il est automatiquement téléchargé sur la machine depuis https://huggingface.co/qsenatore/MovieNet
+
+### `Movie_gradio.py`
+
+- Fournit un interface web Gradio pour utiliser les différents modèles facilement
