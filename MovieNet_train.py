@@ -1,17 +1,40 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader, random_split
 from tqdm import tqdm
 import os
+import zipfile
 import argparse
+import gdown
 from MovieNet import MovieNet
 
 # setting device on GPU if available, else CPU
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Chemin local du dataset
+DATASET_PATH = './content/sorted_movie_posters_paligema'
+GDRIVE_FILE_ID = '1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf'
+ZIP_PATH = './movie_posters.zip'
+
+# Fonction pour télécharger le dataset
+def download_dataset():
+    """Télécharge et dézippe le dataset depuis Google Drive si absent."""
+    if os.path.exists(DATASET_PATH):
+        print(f"Dataset déjà présent : {DATASET_PATH}")
+        return
+
+    print("Dataset absent. Téléchargement depuis Google Drive...")
+    url = f'https://drive.google.com/uc?id={GDRIVE_FILE_ID}'
+    gdown.download(url, ZIP_PATH, quiet=False)
+
+    print("Décompression du dataset...")
+    with zipfile.ZipFile(ZIP_PATH, 'r') as zip_ref:
+        zip_ref.extractall('.')
+    os.remove(ZIP_PATH)
+    print(f"Dataset prêt dans : {DATASET_PATH}")
 
 # Fonction pour tester le modèle
 def test(net, loader):
@@ -54,10 +77,13 @@ def train(net, optimizer, trainloader, testloader, epochs=10):
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--epochs', type=int, default=10)
+    parser.add_argument('--epochs', type=int, default=5)
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--lr', type=float, default=1e-4)
     args = parser.parse_args()
+
+    # Téléchargement automatique du dataset si absent
+    download_dataset()
 
     # Transforms pour les posters
     transform = transforms.Compose([
@@ -68,7 +94,7 @@ if __name__=='__main__':
     ])
 
     dataset = torchvision.datasets.ImageFolder(
-        '/home/senatorequentin/MovieGenre/content/sorted_movie_posters_paligema',  # A modifier en fonction de où est situé le dataset !!!
+        DATASET_PATH,
         transform=transform
     )
 
@@ -89,8 +115,5 @@ if __name__=='__main__':
     # Training
     train(net, optimizer, trainloader, testloader, epochs=args.epochs)
 
-    # Création du dossier des poids s'il n'existe pas
-    os.makedirs('saved_models', exist_ok=True)
-
     # Sauvegarde des poids
-    torch.save(net.state_dict(), 'saved_models/movie_poster_model.pth', _use_new_zipfile_serialization=False)
+    torch.save(net.state_dict(), 'movie_poster_model.pth', _use_new_zipfile_serialization=False)

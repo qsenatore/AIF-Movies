@@ -6,7 +6,7 @@ class MovieNet(nn.Module):
         super().__init__()
         
         # Charger ResNet50 pré-entraîné
-        self.model = models.resnet50(pretrained=True)
+        self.model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
         
         # Geler tous les poids
         for param in self.model.parameters():
