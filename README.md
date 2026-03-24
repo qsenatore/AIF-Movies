@@ -27,12 +27,6 @@ Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la comm
 ### `MovieNet.py`
 - Contient la définition du modèle de prédiction MovieNet. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film
 
-### `Train_MovieNet.py`
-
-- Script d'entraînement du modèle MovieNet
-- Si le dataset n'est pas présent en local, il est auotmatiquement téléchargé sur la machine depuis https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view
-- À la fin de l’entraînement, les poids sont sauvegardés dans `saved_models/` (ignoré par Git)
-
 ### `MovieNet_api.py`
 
 - Fournit une API REST avec Flask pour faire des prédictions
@@ -41,3 +35,9 @@ Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la comm
 ### `MovieNet_gradio.py`
 
 - Fournit un interface web Gradio pour utiliser le modèle facilement
+
+### `Train_MovieNet.py` (Script bonus)
+
+- Script d'entraînement du modèle MovieNet. N'est utilise que si vous voulez réentraîner le modèle vous même.
+- Si le dataset n'est pas présent en local, il est auotmatiquement téléchargé sur la machine depuis https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view
+- Sauvegarde les poids dans le fichier `movie_poster_model.pth`
