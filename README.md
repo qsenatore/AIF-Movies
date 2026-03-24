@@ -1,8 +1,6 @@
 # Artificial Intelligence Frameworks  
 ## Projet INSA 5ème année 🎬 
 
----
-
 ## Objectif
 Intégration d’outils d’intelligence artificielle dans une plateforme de streaming de films.
 
