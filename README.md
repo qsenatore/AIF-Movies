@@ -1,7 +1,15 @@
-# Artificial Intelligence Frameworks - Projet INSA 5ème année
+# Artificial Intelligence Frameworks  
+## Projet INSA 5ème année 🎬 
+
+---
+
+## Objectif
+Intégration d’outils d’intelligence artificielle dans une plateforme de streaming de films.
+
+## Partie 1 — Classification de films
 
 <details>
-<summary><strong>Partie 1</strong><br></summary>
+<summary><strong>Voir les détails</strong><br></summary>
 
 Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend plusieurs étapes :
 
