@@ -4,7 +4,7 @@
 ### Objectif
 Intégration d’outils d’intelligence artificielle dans une plateforme de streaming de films.
 
-## Image et container Docker
+## Lancer l'application avec des images et containers Docker
 
 Pour utiliser les différentes fonctionnalités développées dans ce projet, il suffit de lancer la commande `sudo docker compose up` dans son terminal. Cela construit deux images Docker (une pour l'API, une pour l'interface Gradio), puis instancie deux conteneurs à partir de ces images. L'interface utilisateur est ensuite accessible à l'adresse suivante : `http://localhost:7860`
 
