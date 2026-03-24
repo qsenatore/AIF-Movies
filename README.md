@@ -1,4 +1,7 @@
-# AIF-Movies - Partie 1
+# Artificial Intelligence Framework - Projet INSA 5ème année
+
+<details>
+<summary>Partie 1</summary>
 
 Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend plusieurs étapes :
 
@@ -41,3 +44,5 @@ Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la comm
 - Script d'entraînement du modèle MovieNet. N'est utile que si vous voulez réentraîner le modèle vous même.
 - Si le dataset n'est pas présent en local, il est auotmatiquement téléchargé sur la machine depuis https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view
 - Sauvegarde les poids dans le fichier `movie_poster_model.pth`
+
+</details>
