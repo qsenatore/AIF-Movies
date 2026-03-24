@@ -4,6 +4,10 @@
 ### Objectif
 Intégration d’outils d’intelligence artificielle dans une plateforme de streaming de films.
 
+## Image et container Docker
+
+Pour utiliser les différentes fonctionnalités développées dans ce projet, il suffit de lancer la commande `sudo docker compose up` dans son terminal. Cela construit deux images Docker (une pour l'API, une pour l'interface Gradio), puis instancie deux conteneurs à partir de ces images. L'interface utilisateur est ensuite accessible à l'adresse suivante : `http://localhost:7860`
+
 ## Partie 1 — Classification de films à partir de leur poster
 
 <details>
@@ -26,10 +30,6 @@ Développement d’une interface Gradio pour interagir avec le modèle en local.
 ### 3) Préparation au déploiement
 
 Création d’une image Docker contenant l’API Flask et l’interface Gradio.
-
-## Image et container Docker
-
-Pour utiliser le modèle MovieNet déjà entraîné, il suffit de lancer la commande `sudo docker compose up` dans son terminal. Cela construit deux images Docker (une pour l'API, une pour l'interface Gradio), puis instancie deux conteneurs à partir de ces images. L'interface MovieNet est ensuite accessible à l'adresse suivante : `http://localhost:7860`
 
 ## Scripts Python 
 
