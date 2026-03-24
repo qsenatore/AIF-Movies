@@ -47,7 +47,7 @@ Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 ## Partie 2 — Recommandation de films à partir de leur poster
 
 <details>
-<summary><strong>Voir les détails</strong><</summary>
+<summary><strong>Voir les détails</strong></summary>
 
 Cette partie a pour objectif de développer un modèle capable de recommander d'autres films à partir de l'affiche d'un film.
 
@@ -56,7 +56,7 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 ## Partie 3 —
 
 <details>
-<summary><strong>Voir les détails</strong><</summary>
+<summary><strong>Voir les détails</strong></summary>
 
 
 
@@ -65,7 +65,7 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 ## Partie 4 — 
 
 <details>
-<summary><strong>Voir les détails</strong><</summary>
+<summary><strong>Voir les détails</strong></summary>
 
 
 
@@ -74,7 +74,7 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 ## Partie 5 — 
 
 <details>
-<summary><strong>Voir les détails</strong><</summary>
+<summary><strong>Voir les détails</strong></summary>
 
 
 
