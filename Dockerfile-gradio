@@ -19,5 +19,5 @@ EXPOSE 7860
 # Immediate logging without -t
 ENV PYTHONUNBUFFERED=1
 
-# Run MovieNet_gradio.py when the container launches
-CMD ["python", "MovieNet_gradio.py"]
+# Run Movie_gradio.py when the container launches
+CMD ["python", "Movie_gradio.py"]
