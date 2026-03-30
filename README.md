@@ -20,7 +20,7 @@ Cette partie a pour objectif de développer un modèle capable de prédire le ge
 - Entraînement du modèle sur un dataset d’affiches de films.
 
 
-## Scripts Python 
+### Scripts Python 
 
 ### `MovieNet.py`
 - Contient la définition du modèle de prédiction MovieNet. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film
