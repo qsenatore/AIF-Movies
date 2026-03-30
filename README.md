@@ -13,23 +13,12 @@ Pour utiliser les différentes fonctionnalités développées dans ce projet, il
 <details>
 <summary><strong>Voir les détails</strong></summary>
 
-Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend plusieurs étapes :
+Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend deux étapes :
 
-### 1) Développement et entraînement du modèle
+- Création d’un modèle de computer vision (MovieNet) qui prend en entrée des affiches de films et prédit parmi 10 genres.
 
-Création d’un modèle de computer vision (MovieNet) qui prend en entrée des affiches de films et prédit parmi 10 genres.
+- Entraînement du modèle sur un dataset d’affiches de films.
 
-Entraînement du modèle sur un dataset d’affiches de films.
-
-### 2) Développement d’une API et d’une interface locale
-
-Création d’une API Flask pour faire des prédictions sur une ou plusieurs images.
-
-Développement d’une interface Gradio pour interagir avec le modèle en local.
-
-### 3) Préparation au déploiement
-
-Création d’une image Docker contenant l’API Flask et l’interface Gradio.
 
 ## Scripts Python 
 
