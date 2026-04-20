@@ -1,11 +1,21 @@
 import gradio as gr
 import requests
 import io
+import os
 import matplotlib.pyplot as plt
+from PIL import Image
 
+# Si usage de Gradio SANS Docker : 
+#API_URL = "http://127.0.0.1:5075/predict"
+#RECO_API_URL = "http://127.0.0.1:5075/recommend"
+
+# Si usage de Gradio AVEC Docker : 
 API_URL = "http://api:5075/predict"
+RECO_API_URL = "http://api:5075/recommend"
+
 genres = ["action", "animation", "documentary", "comedy", "drama", 
           "fantasy", "horror", "romance", "science fiction", "thriller"]
+
 
 def predict_genre(image):
 
@@ -38,15 +48,52 @@ def predict_genre(image):
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2, height + 0.01, f"{height:.2f}", ha='center', va='bottom')
     
-    return image, fig
+    return fig
 
-interface = gr.Interface(
-    fn=predict_genre,
-    inputs=gr.Image(type="pil"),
-    outputs=[gr.Image(type="pil"), gr.Plot()],
-    title="Classificateur de genres de films",
-    description="Téléversez une affiche de film pour prédire son genre. L'histogramme montre les probabilités pour les 10 genres."
-)
+
+def recommend_movies(image):
+
+    # Convert PIL image to binary
+    img_binary = io.BytesIO()
+    image.save(img_binary, format="PNG")
+
+    # Send image to API
+    response = requests.post(RECO_API_URL,files={"file": ("image.png", img_binary.getvalue(), "image/png")})
+    result = response.json()
+
+    paths = result["recommendations"]
+
+    imgs = []
+    for p in paths:
+        if os.path.exists(p):
+            imgs.append(Image.open(p))
+    
+    return imgs
+
+
+interface = gr.Blocks()
+with interface:
+    gr.Markdown("IAF Project")
+
+    with gr.Tab("Genre Prediction"):
+        inp = gr.Image(type="pil")
+        out_plot = gr.Plot()
+
+        gr.Button("Predict").click(
+            fn=predict_genre,
+            inputs=inp,
+            outputs=[out_plot]
+        )
+
+    with gr.Tab("Recommendations"):
+        inp2 = gr.Image(type="pil")
+        out2 = gr.Gallery(label="Similar Movies")
+
+        gr.Button("Recommend").click(
+            fn=recommend_movies,
+            inputs=inp2,
+            outputs=out2
+        )
 
 if __name__ == "__main__":
     print("Démarrage de l'application Gradio...")

@@ -2,16 +2,25 @@ import argparse
 import torch
 import torchvision.transforms as transforms
 import torch.nn.functional as F
+from torchvision.models import resnet50, ResNet50_Weights
 from flask import Flask, jsonify, request
 from PIL import Image
 import io
 import os
+import numpy as np
 from huggingface_hub import hf_hub_download
+
 from MovieNet import MovieNet
+from Recommendation import MovieRecommender
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 app = Flask(__name__)
+
+# -------------------------
+# Début partie CLASSIFICATION
+# -------------------------
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_path', type=str, default='movie_poster_model.pth')
@@ -55,6 +64,33 @@ genres = [
     "science fiction",
     "thriller"
 ]
+# -------------------------
+# Fin partie CLASSIFICATION
+# -------------------------
+
+
+# -------------------------
+# Début partie RECOMMANDATION
+# -------------------------
+
+# Télécharge les features extraites dans Recommendation.py
+recommender = MovieRecommender(
+    features_path="features.npy",
+    df_path="df.pkl"
+)
+
+# Poids par défaut de ResNet50
+weights = ResNet50_Weights.DEFAULT
+resnet = resnet50(weights=weights)
+
+resnet_model = torch.nn.Sequential(*list(resnet.children())[:-1]).to(device)
+resnet_model.eval()
+
+# -------------------------
+# Fin partie RECOMMANDATION
+# -------------------------
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -102,6 +138,32 @@ def batch_predict():
         "predictions_index": predictions.tolist(),
         "predictions_genre": genres_pred
     })
+
+@app.route('/recommend', methods=['POST'])
+def recommend():
+
+    try:
+        file = request.files["file"]
+        img_pil = Image.open(file.stream).convert("RGB")
+
+        tensor = transform(img_pil).unsqueeze(0).to(device)
+
+        with torch.no_grad():
+            embedding = resnet_model(tensor)
+            embedding = torch.flatten(embedding, 1)
+            embedding = embedding.cpu().numpy()[0]
+
+        paths = recommender.recommend_from_vector(embedding, top_k=5)
+
+        return jsonify({
+            "recommendations": paths
+        })
+
+    except Exception as e:
+        print("ERROR /recommend:", e)
+        return jsonify({"error": str(e)}), 500
+
+
 
 
 if __name__ == "__main__":
