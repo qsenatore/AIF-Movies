@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 # Si usage de Gradio SANS Docker : 
-#API_URL = "http://127.0.0.1:5075/predict"
-#RECO_API_URL = "http://127.0.0.1:5075/recommend"
+# API_URL = "http://127.0.0.1:5075/predict"
+# RECO_API_URL = "http://127.0.0.1:5075/recommend"
 
 # Si usage de Gradio AVEC Docker : 
 API_URL = "http://api:5075/predict"
