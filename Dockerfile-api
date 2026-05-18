@@ -7,8 +7,14 @@ WORKDIR /app
 # Copy only the requirements file first to leverage Docker cache
 COPY requirements-api.txt .
 
+# Installer g++ nécessaire pour compiler annoy
+RUN apt-get update && apt-get install -y g++ && rm -rf /var/lib/apt/lists/*
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements-api.txt
+
+# Télécharger les stopwords NLTK à la construction de l'image
+RUN python -c "import nltk; nltk.download('stopwords')"
 
 # Copy the current directory contents into the container at /app
 COPY . /app
@@ -20,4 +26,10 @@ EXPOSE 5075
 ENV FLASK_ENV=production
 
 # Run Movie_api.py when the container launches
-CMD ["python", "Movie_api.py", "--model_path", "saved_models/movie_poster_model.pth"]
+CMD ["python", "Movie_api.py", \
+     "--model_path", "saved_models/movie_poster_model.pth", \
+     "--bow_path", "saved_models/model_weights_bag_of_words.pth", \
+     "--lstm_path", "saved_models/model_weights_lstm.pth", \
+     "--bert_path", "saved_models/bert_model_weights_1.pth", \
+     "--vocab_path", "saved_models/vocab.pkl", \
+     "--label_encoder_path", "saved_models/label_encoder.pkl"]
