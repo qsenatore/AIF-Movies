@@ -42,7 +42,7 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 
 </details>
 
-## Partie 3 —
+## Partie 3 — Classification par synopsis
 
 <details>
 <summary><strong>Voir les détails</strong></summary>
