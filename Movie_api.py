@@ -11,35 +11,32 @@ import string
 import pickle
 import json
 import numpy as np
-
 import nltk
-nltk.download('stopwords', quiet=True)
 from nltk.corpus import stopwords
-
 import torch.nn as nn
 from huggingface_hub import hf_hub_download
 from transformers import DistilBertTokenizerFast, DistilBertForSequenceClassification
 from annoy import AnnoyIndex
 from MovieNet import MovieNet
 
-# ─── Device ───────────────────────────────────────────────────────────────────
+# Utilisation GPU ou CPU
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Création de l'API Flask
 
 app = Flask(__name__)
 
+# Lien du repo HuggingFace
+
 HF_REPO = "qsenatore/MovieNet"
 
-# ─── Chemin (local ou HuggingFace) ────────────────────────────────────────────
+# Chemin des modèles (depuis HuggingFace)
 
-def get_model(arg_path, filename):
-    # Retourne le chemin local, télécharge depuis HF si absent
-    if not os.path.exists(arg_path):
-        print(f"Téléchargement {filename} depuis HuggingFace...")
-        return hf_hub_download(repo_id=HF_REPO, filename=filename)
-    print(f"{filename} trouvé en local : {arg_path}")
-    return arg_path
+def get_model(filename):
+    print(f"Téléchargement {filename} depuis HuggingFace...")
+    return hf_hub_download(repo_id=HF_REPO, filename=filename)
 
-# ─── Args ─────────────────────────────────────────────────────────────────────
+# Arguments
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_path',         type=str, default='saved_models/movie_poster_model.pth')
@@ -52,24 +49,26 @@ parser.add_argument('--bert_annoy',         type=str, default='saved_models/plot
 parser.add_argument('--metadata',           type=str, default='saved_models/annoy_metadata_bert_1.json')
 args = parser.parse_args()
 
-# Résolution : local si présent, sinon téléchargement HuggingFace
-args.model_path         = get_model(args.model_path,         "movie_poster_model.pth")
-args.bow_path           = get_model(args.bow_path,           "model_weights_bag_of_words.pth")
-args.lstm_path          = get_model(args.lstm_path,          "model_weights_lstm.pth")
-args.bert_path          = get_model(args.bert_path,          "bert_model_weights_1.pth")
-args.vocab_path         = get_model(args.vocab_path,         "vocab.pkl")
-args.label_encoder_path = get_model(args.label_encoder_path, "label_encoder.pkl")
-args.bert_annoy         = get_model(args.bert_annoy,         "plot_embeddings_bert_1.ann")
-args.metadata           = get_model(args.metadata,           "annoy_metadata_bert_1.json")
+# Téléchargement des modèles depuis HuggingFace
 
-# ─── Genres ───────────────────────────────────────────────────────────────────
+args.model_path         = get_model("movie_poster_model.pth")
+args.bow_path           = get_model("model_weights_bag_of_words.pth")
+args.lstm_path          = get_model("model_weights_lstm.pth")
+args.bert_path          = get_model("bert_model_weights_1.pth")
+args.vocab_path         = get_model("vocab.pkl")
+args.label_encoder_path = get_model("label_encoder.pkl")
+args.bert_annoy         = get_model("plot_embeddings_bert_1.ann")
+args.metadata           = get_model("annoy_metadata_bert_1.json")
+
+# Genres de films
+
 genres = [
     "action", "animation", "documentary", "comedy", "drama",
     "fantasy", "horror", "romance", "science fiction", "thriller"
 ]
 
 # =============================================================================
-# VISION — MovieNet
+# Partie 1 — Modèle MovieNet (CNN)
 # =============================================================================
 
 poster_model = MovieNet(num_classes=10).to(device)
@@ -84,9 +83,17 @@ transform = transforms.Compose([
 ])
 
 # =============================================================================
-# NLP — Utilitaires partagés
+# Partie 2 — 
 # =============================================================================
 
+
+
+
+# =============================================================================
+# Partie 3 — Utilitaires partagés
+# =============================================================================
+
+nltk.download('stopwords', quiet=True)
 stop_words = set(stopwords.words('english'))
 
 def improved_tokenizer(text):
@@ -137,7 +144,7 @@ def format_recommendations(indices, distances):
     return results
 
 # =============================================================================
-# NLP — Modèle Bag-of-Words
+# Partie 3 — Modèle Bag-of-Words
 # =============================================================================
 
 class TextClassificationModel(nn.Module):
@@ -175,7 +182,7 @@ bow_annoy_index.build(n_trees=10)
 print(f"Index Annoy BoW construit : {len(movie_metadata)} films.")
 
 # =============================================================================
-# NLP — Modèle LSTM
+# Partie 3 — Modèle LSTM
 # =============================================================================
 
 class TextClassifier(nn.Module):
@@ -220,7 +227,7 @@ lstm_annoy_index.build(n_trees=10)
 print(f"Index Annoy LSTM construit : {len(movie_metadata)} films.")
 
 # =============================================================================
-# NLP — Modèle BERT (DistilBERT)
+# Partie 3 — Modèle BERT (DistilBERT)
 # =============================================================================
 
 class BertClf(nn.Module):
@@ -254,7 +261,7 @@ bert_annoy_index.load(args.bert_annoy)
 print("Index Annoy BERT chargé.")
 
 # =============================================================================
-# Utilitaires vectorisation
+# Partie 3 - Utilitaires vectorisation
 # =============================================================================
 
 def text_to_tensor(tokens):
@@ -289,7 +296,7 @@ def get_bert_cls_vector(plot_text):
     return hidden_states[-1][:, 0, :].squeeze(0).cpu().numpy()
 
 # =============================================================================
-# ROUTES VISION
+# ROUTES Partie 1 - Prédiction de genre à partir du poster
 # =============================================================================
 
 @app.route('/predict', methods=['POST'])
@@ -313,7 +320,13 @@ def batch_predict():
                     "predictions_genre": [genres[p] for p in preds.tolist()]})
 
 # =============================================================================
-# ROUTES NLP — Prédiction de genre
+# ROUTES Partie 2 — Recommandation de films à partir de l'affiche
+# =============================================================================
+
+
+
+# =============================================================================
+# ROUTES Partie 3 — Prédiction de genre à partir du synopsis
 # =============================================================================
 
 @app.route('/predict_plot_bow', methods=['POST'])
@@ -359,7 +372,7 @@ def predict_plot_bert():
     return jsonify({"model": "bert", "prediction_genre": decode_label(predicted.item())})
 
 # =============================================================================
-# ROUTES NLP — Recommandation de films
+# ROUTES Partie 3 — Recommandation de films à partir du synopsis
 # =============================================================================
 
 @app.route('/recommend_bow', methods=['POST'])

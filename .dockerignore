@@ -1,0 +1,27 @@
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Notebooks
+*.ipynb
+
+# Git
+.git
+
+# OS
+.DS_Store
+
+# Données lourdes
+data/
+datasets/
+saved_models/
+
+# modèles
+*.pth
+*.pkl
+*.bin
+
+# environnements locaux
+.env
+.venv

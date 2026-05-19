@@ -1,35 +1,17 @@
-# Use an official Python runtime as the parent image
 FROM python:3.12-slim
 
-# Set the working directory in the container to /app
 WORKDIR /app
 
-# Copy only the requirements file first to leverage Docker cache
 COPY requirements-api.txt .
 
-# Installer g++ nécessaire pour compiler annoy
 RUN apt-get update && apt-get install -y g++ && rm -rf /var/lib/apt/lists/*
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements-api.txt
+RUN pip install --no-cache-dir -r requirements-api.txt
 
-# Télécharger les stopwords NLTK à la construction de l'image
-RUN python -c "import nltk; nltk.download('stopwords')"
+COPY . .
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Make port 5075 available to the world outside this container
 EXPOSE 5075
 
-# Define environment variable for Flask to run in production mode
-ENV FLASK_ENV=production
+ENV PYTHONUNBUFFERED=1
 
-# Run Movie_api.py when the container launches
-CMD ["python", "Movie_api.py", \
-     "--model_path", "saved_models/movie_poster_model.pth", \
-     "--bow_path", "saved_models/model_weights_bag_of_words.pth", \
-     "--lstm_path", "saved_models/model_weights_lstm.pth", \
-     "--bert_path", "saved_models/bert_model_weights_1.pth", \
-     "--vocab_path", "saved_models/vocab.pkl", \
-     "--label_encoder_path", "saved_models/label_encoder.pkl"]
+CMD ["python", "Movie_api.py"]
