@@ -33,9 +33,9 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 
 Cette partie a pour objectif de développer des modèles capables de prédire le genre d'un film et recommander d'autres films à partir du synopsis de ce film. Ce sont un modèle Bag-of-Words, un modèle LSTM et un modèle basé sur DistilBERT qui sont utilisés. 
 
-Le modèle Bag-of-Words repose sur une moyenne des embeddings de mots suivie d’une couche linéaire de classification. 
-Le modèle LSTM exploite une architecture récurrente afin de capturer les dépendances séquentielles du texte
-Le modèle BERT utilise des représentations contextuelles pré-entraînées issues d’un transformer partiellement fine-tuné pour la tâche de classification. 
+Le modèle Bag-of-Words repose sur une moyenne des embeddings de mots suivie d’une couche linéaire de classification.  
+Le modèle LSTM exploite une architecture récurrente afin de capturer les dépendances séquentielles du texte.  
+Le modèle BERT utilise des représentations contextuelles pré-entraînées issues d’un transformer partiellement fine-tuné pour la tâche de classification.   
 
 Dans les trois cas, les représentations textuelles apprises sont également utilisées pour construire un espace vectoriel des films, permettant de générer des recommandations via un index de similarité Annoy basé sur la distance angulaire entre embeddings.
 
@@ -59,5 +59,7 @@ Dans les trois cas, les représentations textuelles apprises sont également uti
 ### `Movie_gradio.py`
 
 - Fournit un interface web Gradio pour utiliser les différents modèles facilement
+
+### `Codes d'entraînement`
 
 Dans le fichier `Codes d'entraînement` se trouvent les codes pour l'entraînement des différents modèles.
