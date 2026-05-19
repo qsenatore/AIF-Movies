@@ -3,7 +3,11 @@ import requests
 import io
 import matplotlib.pyplot as plt
 
+# Si Docker est utilisé
 BASE_URL = "http://api:5075"
+
+# Si c'est utilisé en local
+# BASE_URL = "http://localhost:5075"
 
 genres = ["action", "animation", "documentary", "comedy", "drama",
           "fantasy", "horror", "romance", "science fiction", "thriller"]
