@@ -13,23 +13,7 @@ Pour utiliser les différentes fonctionnalités développées dans ce projet, il
 <details>
 <summary><strong>Voir les détails</strong></summary>
 
-Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. Elle comprend deux étapes :
-
-- Création d’un modèle de computer vision (MovieNet) qui prend en entrée des affiches de films et prédit parmi 10 genres.
-
-- Entraînement du modèle sur un dataset d’affiches de films.
-
-
-### Scripts Python 
-
-#### `MovieNet.py`
-- Contient la définition du modèle de prédiction MovieNet. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film
-
-#### `Train_MovieNet.py` (Script bonus)
-
-- Script d'entraînement du modèle MovieNet. N'est utile que si vous voulez réentraîner le modèle vous même.
-- Si le dataset n'est pas présent en local, il est auotmatiquement téléchargé sur la machine depuis https://drive.google.com/file/d/1-1OSGlN2EOqyZuehBgpgI8FNOtK-caYf/view
-- Sauvegarde les poids dans le fichier `movie_poster_model.pth`
+Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film.
 
 </details>
 
@@ -42,12 +26,18 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 
 </details>
 
-## Partie 3 — Classification de films par leur synopsis
+## Partie 3 — Classification et Recommandation de films par leur synopsis
 
 <details>
 <summary><strong>Voir les détails</strong></summary>
 
+Cette partie a pour objectif de développer des modèles capables de prédire le genre d'un film et recommander d'autres films à partir du synopsis de ce film. Ce sont un modèle Bag-of-Words, un modèle LSTM et un modèle basé sur DistilBERT qui sont utilisés. 
 
+Le modèle Bag-of-Words repose sur une moyenne des embeddings de mots suivie d’une couche linéaire de classification. 
+Le modèle LSTM exploite une architecture récurrente afin de capturer les dépendances séquentielles du texte
+Le modèle BERT utilise des représentations contextuelles pré-entraînées issues d’un transformer partiellement fine-tuné pour la tâche de classification. 
+
+Dans les trois cas, les représentations textuelles apprises sont également utilisées pour construire un espace vectoriel des films, permettant de générer des recommandations via un index de similarité Annoy basé sur la distance angulaire entre embeddings.
 
 </details>
 
@@ -60,22 +50,14 @@ Cette partie a pour objectif de développer un modèle capable de recommander d'
 
 </details>
 
-## Partie 5 — 
-
-<details>
-<summary><strong>Voir les détails</strong></summary>
-
-
-
-</details>
-
-### Scripts Python utilisés dans les 5 parties
+### Scripts Python utilisés dans les 4 parties
 
 ### `Movie_api.py`
 
 - Fournit une API REST avec Flask
-- Pour la prédiction de genre de films, si le fichier avec les poids du modèle n'est pas présent en local, il est automatiquement téléchargé sur la machine depuis https://huggingface.co/qsenatore/MovieNet
 
 ### `Movie_gradio.py`
 
 - Fournit un interface web Gradio pour utiliser les différents modèles facilement
+
+Dans le fichier `Codes d'entraînement` se trouvent les codes pour l'entraînement des différents modèles.
