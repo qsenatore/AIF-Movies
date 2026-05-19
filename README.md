@@ -13,7 +13,9 @@ Pour utiliser les différentes fonctionnalités développées dans ce projet, il
 <details>
 <summary><strong>Voir les détails</strong></summary>
 
-Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche. C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film.
+Cette partie a pour objectif de développer un modèle capable de prédire le genre d’un film à partir de son affiche.
+
+C'est un ResNet50 pré-entraîné sur le dataset ImageNet, auquel il a été ajouté une couche linéaire de classification pour l'adapter à la tâche de prédiction de genre de film.
 
 </details>
 
