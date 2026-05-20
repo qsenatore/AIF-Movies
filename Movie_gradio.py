@@ -114,6 +114,12 @@ def recommend_bert(plot):
     return recommend_films(plot, "recommend_bert", "BERT")
 
 # =============================================================================
+# Fonctions — Partie 4
+# =============================================================================
+
+
+
+# =============================================================================
 # Couleurs et style de l'interface
 # =============================================================================
 
@@ -212,7 +218,7 @@ with gr.Blocks(title="Movie AI", css=CSS) as demo:
         btn_p1 = gr.Button("Partie 1")
         btn_p2 = gr.Button("Partie 2")
         btn_p3 = gr.Button("Partie 3")
-
+        btn_p4 = gr.Button("Partie 4")
         gr.Markdown("""
 ---
 
@@ -325,6 +331,17 @@ with gr.Blocks(title="Movie AI", css=CSS) as demo:
             )
             
         back3 = gr.Button("Retour accueil")
+        
+    # ─────────────────────────────────────────────────────────────
+    # PARTIE 4
+    # ─────────────────────────────────────────────────────────────
+    with gr.Column(visible=False) as page_p4:
+
+        gr.Markdown("## Partie 4 - A compléter")
+
+        gr.Markdown("À compléter")
+
+        back4 = gr.Button("Retour accueil")
 
     # ─────────────────────────────────────────────────────────────
     # NAVIGATION LOGIC
@@ -336,12 +353,14 @@ with gr.Blocks(title="Movie AI", css=CSS) as demo:
             gr.update(visible=False),
             gr.update(visible=False),
             gr.update(visible=False),
+            gr.update(visible=False),
         )
 
     def show_p1():
         return (
             gr.update(visible=False),
             gr.update(visible=True),
+            gr.update(visible=False),
             gr.update(visible=False),
             gr.update(visible=False),
         )
@@ -352,6 +371,7 @@ with gr.Blocks(title="Movie AI", css=CSS) as demo:
             gr.update(visible=False),
             gr.update(visible=True),
             gr.update(visible=False),
+            gr.update(visible=False),
         )
 
     def show_p3():
@@ -360,16 +380,28 @@ with gr.Blocks(title="Movie AI", css=CSS) as demo:
             gr.update(visible=False),
             gr.update(visible=False),
             gr.update(visible=True),
+            gr.update(visible=False),
+        )
+
+    def show_p4():
+        return (
+            gr.update(visible=False),
+            gr.update(visible=False),
+            gr.update(visible=False),
+            gr.update(visible=False),
+            gr.update(visible=True),
         )
 
     # Boutons navigation
-    btn_p1.click(show_p1, outputs=[home_page, page_p1, page_p2, page_p3])
-    btn_p2.click(show_p2, outputs=[home_page, page_p1, page_p2, page_p3])
-    btn_p3.click(show_p3, outputs=[home_page, page_p1, page_p2, page_p3])
-
-    back1.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3])
-    back2.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3])
-    back3.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3])
+    btn_p1.click(show_p1, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    btn_p2.click(show_p2, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    btn_p3.click(show_p3, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    btn_p4.click(show_p4, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    
+    back1.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    back2.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    back3.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
+    back4.click(show_home, outputs=[home_page, page_p1, page_p2, page_p3, page_p4])
 
 if __name__ == "__main__":
     print("Démarrage de l'application Gradio...")

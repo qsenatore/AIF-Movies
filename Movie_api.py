@@ -5,7 +5,6 @@ import torch.nn.functional as F
 from flask import Flask, jsonify, request
 from PIL import Image
 import io
-import os
 import re
 import string
 import pickle
@@ -296,6 +295,12 @@ def get_bert_cls_vector(plot_text):
     return hidden_states[-1][:, 0, :].squeeze(0).cpu().numpy()
 
 # =============================================================================
+# Partie 4 -
+# =============================================================================
+
+
+
+# =============================================================================
 # ROUTES Partie 1 - Prédiction de genre à partir du poster
 # =============================================================================
 
@@ -412,6 +417,11 @@ def recommend_bert():
     indices, distances = bert_annoy_index.get_nns_by_vector(query_vector, 6, include_distances=True)
     return jsonify({"model": "bert",
                     "recommendations": format_recommendations(indices, distances)})
+
+# =============================================================================
+# ROUTES Partie 4 — 
+# =============================================================================
+
 
 
 if __name__ == "__main__":
